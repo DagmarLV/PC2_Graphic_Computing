@@ -8,7 +8,7 @@ import glob
 import numpy as np
 
 username = 'DagmarLV'
-access_token = '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'
+access_token = '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'
 github_repo_name = 'PC2_Graphic_Computing'
 
 g = Github(access_token)

@@ -1,4 +1,4 @@
-PyGithub
+PyGithub==1.55
 Keras==2.12
 tensorflow==2.12
 click==8.1.3

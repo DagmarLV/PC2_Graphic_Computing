@@ -1,3 +1,4 @@
+from github import Github
 import tempfile
 import os
 from flask import Flask, request, redirect, send_file, render_template
@@ -5,6 +6,14 @@ from skimage import io
 import base64
 import glob
 import numpy as np
+
+username = 'DagmarLV'
+access_token = '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'
+github_repo_name = 'PC2_Graphic_Computing'
+
+g = Github(username, access_token)
+
+repo = g.get_user().get_repo(github_repo_name)
 
 app = Flask(__name__)
 
@@ -21,7 +30,10 @@ def upload():
         print(aleatorio)
         with tempfile.NamedTemporaryFile(delete = False, mode = "w+b", suffix='.png', dir=str(aleatorio)) as fh:
             fh.write(base64.b64decode(img_data))
-        #file = request.files['myImage']
+            
+        file_path = f"aleatorio/{os.path.basename(fh.name)}"
+        repo.create_file(file_path, f"Uploading {aleatorio} image", open(fh.name, 'rb').read(), branch="main")
+       
         print("Image uploaded")
     except Exception as err:
         print("Error occurred")
@@ -46,6 +58,13 @@ def prepare_dataset():
     digits = np.concatenate(digits)
     np.save('X.npy', images)
     np.save('y.npy', digits)
+    with open('X.npy', 'rb') as file:
+        repo.create_file('X.npy', 'Uploading X.npy file', base64.b64encode(file.read()).decode())
+
+    with open('y.npy', 'rb') as file:
+        repo.create_file('y.npy', 'Uploading y.npy file', base64.b64encode(file.read()).decode())
+
+    
     return "OK!"
 
 @app.route('/X.npy', methods=['GET'])

@@ -8,7 +8,7 @@ import glob
 import numpy as np
 
 username = 'DagmarLV'
-access_token = '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'
+access_token = os.environ.get("token")
 github_repo_name = 'PC2_Graphic_Computing'
 
 g = Github(access_token)

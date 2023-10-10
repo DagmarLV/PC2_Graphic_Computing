@@ -11,7 +11,7 @@ username = 'DagmarLV'
 access_token = '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'
 github_repo_name = 'PC2_Graphic_Computing'
 
-g = Github(username, access_token)
+g = Github(access_token)
 
 repo = g.get_user().get_repo(github_repo_name)
 

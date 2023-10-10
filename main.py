@@ -31,7 +31,7 @@ def upload():
         with tempfile.NamedTemporaryFile(delete = False, mode = "w+b", suffix='.png', dir=str(aleatorio)) as fh:
             fh.write(base64.b64decode(img_data))
             
-        file_path = f"aleatorio/{os.path.basename(fh.name)}"
+        file_path = f"{aleatorio}/{os.path.basename(fh.name)}"
         repo.create_file(file_path, f"Uploading {aleatorio} image", open(fh.name, 'rb').read(), branch="main")
        
         print("Image uploaded")

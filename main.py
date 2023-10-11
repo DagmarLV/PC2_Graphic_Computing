@@ -94,7 +94,7 @@ def predict():
         img_array = img_resized.reshape(1, 28, 28, 1)
 
         prediction = modelo_cargado.predict(img_array)
-        
+        print(prediction)
         etiquetas = {0: "owo", 1: "unu", 2: "uwu", 3: "7u7"}
 
         valor = np.argmax(prediction)

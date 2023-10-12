@@ -29,7 +29,7 @@ def main():
 @app.route('/upload', methods=['POST'])
 def upload():
     try:
-        # check if the post request has the file part
+        
         img_data = request.form.get('myImage').replace("data:image/png;base64,","")
         aleatorio = request.form.get('numero')
         print(aleatorio)

@@ -75,10 +75,10 @@ def prepare_dataset():
     print("end")
     with open('X.npy', 'rb') as file:
         repo.create_file('X.npy', 'Uploading X.npy file', base64.b64encode(file.read()).decode())
-
+    print("end1")
     with open('y.npy', 'rb') as file:
         repo.create_file('y.npy', 'Uploading y.npy file', base64.b64encode(file.read()).decode())
-
+    print("end2")
     
     return "OK!"
 

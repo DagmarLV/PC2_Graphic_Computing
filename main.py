@@ -52,35 +52,20 @@ def prepare_dataset():
     images = []
     d = ["owo", "unu", "uwu","7u7"]
     digits = []
-    print("prueba")
     for digit in d:
-      print("on for")
       filelist = glob.glob('{}/*.png'.format(digit))
-      print("2")
       images_read = io.concatenate_images(io.imread_collection(filelist))
-      print("3")
       images_read = images_read[:, :, :, 3]
-      print("4")
       digits_read = np.array([d.index(digit)] * images_read.shape[0], dtype=np.int32)
-      print("5")
       images.append(images_read)
-      print("6")
       digits.append(digits_read)
-      print("7")
-    print("out for")
+   
     images = np.vstack(images)
     digits = np.concatenate(digits)
     np.save('X.npy', images)
     np.save('y.npy', digits)
-    print("end")
-    with open('X.npy', 'rb') as file:
-        repo.create_file('X.npy', 'Uploading X.npy file', base64.b64encode(file.read()).decode())
-    print("end1")
-    with open('y.npy', 'rb') as file:
-        repo.create_file('y.npy', 'Uploading y.npy file', base64.b64encode(file.read()).decode())
-    print("end2")
     
-    return "OK!"
+    return "El dataset se ha generado exitosamente"
 
 @app.route('/X.npy', methods=['GET'])
 def download_X():
